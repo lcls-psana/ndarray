@@ -11,6 +11,11 @@ Package author: Andy Salnikov
 Please describe any modifications that you made to the package in the
 reverse time order.
 
+Tag: V01-01-07
+2017-03-01 Clemens Weninger
+- add optimized operator () to access 2D, 3D and 4D arrays
+- deprecated the operator [] due to very bad performance
+
 Tag: V01-01-06
 2013-09-17 Andy Salnikov
 - ndarray will be installed in external area now, remove SConscript so

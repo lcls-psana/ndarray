@@ -3,7 +3,7 @@
 
 //--------------------------------------------------------------------------
 // File and Version Information:
-// 	$Id$
+// 	$Id: ndarray.h 6652 2013-08-13 18:19:30Z salnikov@SLAC.STANFORD.EDU $
 //
 // Description:
 //	Class ndarray.
@@ -17,6 +17,7 @@
 #include <functional>
 #include <numeric>
 #include <iterator>
+#include <cassert>
 
 //----------------------
 // Base Class Headers --
@@ -242,10 +243,10 @@ namespace ndarray_details {
  *    ndarray<const int, 1> arr2d = make_ndarray(cdata, 1048576);
  *    @endcode
  *
- *  This software was developed for the LCLS project.  If you use all or 
+ *  This software was developed for the LCLS project.  If you use all or
  *  part of it, please give an appropriate acknowledgment.
  *
- *  @version $Id$
+ *  @version $Id: ndarray.h 6652 2013-08-13 18:19:30Z salnikov@SLAC.STANFORD.EDU $
  *
  *  @author Andy Salnikov
  */
@@ -389,6 +390,50 @@ public:
   }
 
   /**
+   *  @brief Optimized access operator for 2D arrays
+   */
+  inline element& operator() (size_t i, size_t j)
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1]];
+  }
+  
+  inline const element& operator() (size_t i, size_t j) const
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1]];
+  }
+
+  /**
+   *  @brief Optimized access operator for 3D arrays
+   */
+  inline element& operator() (size_t i, size_t j, size_t k)
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2]];
+  }
+  
+  inline const element& operator() (size_t i, size_t j, size_t k) const
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2]];
+  }
+  
+  /**
+   *  @brief Optimized access operator for 4D arrays
+   */
+  inline element& operator() (size_t i, size_t j, size_t k, size_t l)
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]) && (l < Super::m_shape[3]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2] + l*Super::m_strides[3]];
+  }
+  inline const element& operator() (size_t i, size_t j, size_t k, size_t l) const
+  {
+      assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]) && (l < Super::m_shape[3]));
+      return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2] + l*Super::m_strides[3]];
+  }
+
+  /**
    *  Returns pointer to the beginning of the data array.
    */
   element* data() const { return Super::m_data.get(); }
@@ -495,7 +540,7 @@ private:
 /// Note there may be potential problems with memory management with raw pointers.
 template <typename ElemType>
 inline
-ndarray<ElemType, 1> 
+ndarray<ElemType, 1>
 make_ndarray(ElemType* data, unsigned dim0)
 {
   unsigned shape[] = {dim0};
@@ -507,7 +552,7 @@ make_ndarray(ElemType* data, unsigned dim0)
 /// Note there may be potential problems with memory management with raw pointers.
 template <typename ElemType>
 inline
-ndarray<ElemType, 2> 
+ndarray<ElemType, 2>
 make_ndarray(ElemType* data, unsigned dim0, unsigned dim1)
 {
   unsigned shape[] = {dim0, dim1};
@@ -519,7 +564,7 @@ make_ndarray(ElemType* data, unsigned dim0, unsigned dim1)
 /// Note there may be potential problems with memory management with raw pointers.
 template <typename ElemType>
 inline
-ndarray<ElemType, 3> 
+ndarray<ElemType, 3>
 make_ndarray(ElemType* data, unsigned dim0, unsigned dim1, unsigned dim2)
 {
   unsigned shape[] = {dim0, dim1, dim2};
@@ -531,7 +576,7 @@ make_ndarray(ElemType* data, unsigned dim0, unsigned dim1, unsigned dim2)
 /// Note there may be potential problems with memory management with raw pointers.
 template <typename ElemType>
 inline
-ndarray<ElemType, 4> 
+ndarray<ElemType, 4>
 make_ndarray(ElemType* data, unsigned dim0, unsigned dim1, unsigned dim2, unsigned dim3)
 {
   unsigned shape[] = {dim0, dim1, dim2, dim3};

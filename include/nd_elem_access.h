@@ -3,7 +3,7 @@
 
 //--------------------------------------------------------------------------
 // File and Version Information:
-// 	$Id$
+// 	$Id: nd_elem_access.h 5235 2013-01-30 17:42:31Z salnikov@SLAC.STANFORD.EDU $
 //
 // Description:
 //	Class nd_elem_access.
@@ -41,12 +41,12 @@ namespace ndarray_details {
  *
  *  @brief Class nd_elem_access which implements element access for ndarray.
  *
- *  This software was developed for the LCLS project.  If you use all or 
+ *  This software was developed for the LCLS project.  If you use all or
  *  part of it, please give an appropriate acknowledgment.
  *
  *  @see AdditionalClass
  *
- *  @version $Id$
+ *  @version $Id: nd_elem_access.h 5235 2013-01-30 17:42:31Z salnikov@SLAC.STANFORD.EDU $
  *
  *  @author Andy Salnikov
  */
@@ -72,7 +72,9 @@ public:
     return *this;
   }
 
-  nd_elem_access_pxy<ElemType, NDim-1> operator[](int i) const {
+  nd_elem_access_pxy<ElemType, NDim-1> operator[](int i) const
+     __attribute__ ((deprecated("Do not use because of serious performance problems. Use operator () instead")))
+{
     boost::shared_ptr<ElemType> ptr(Super::m_data, Super::m_data.get() + i*Super::m_strides[0]);
     return nd_elem_access_pxy<ElemType, NDim-1>(ptr, Super::m_shape+1, Super::m_strides+1);
   }
