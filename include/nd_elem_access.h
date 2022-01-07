@@ -73,8 +73,8 @@ public:
   }
 
   nd_elem_access_pxy<ElemType, NDim-1> operator[](int i) const
-     __attribute__ ((deprecated))
-{
+  /*   __attribute__ ((deprecated)) */
+  {
     boost::shared_ptr<ElemType> ptr(Super::m_data, Super::m_data.get() + i*Super::m_strides[0]);
     return nd_elem_access_pxy<ElemType, NDim-1>(ptr, Super::m_shape+1, Super::m_strides+1);
   }

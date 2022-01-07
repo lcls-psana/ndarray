@@ -11,6 +11,14 @@ Package author: Andy Salnikov
 Please describe any modifications that you made to the package in the
 reverse time order.
 
+Tag: V01-01-09
+2022-01-07 Mikhail Dubrovin
+- include/nd_elem_access.h - comment-out __attribute__ ((deprecated))
+  to get rid of annoying messages at compilation
+  assuming that the operator [] is not used in new development
+
+Tag: V01-01-08 ???
+
 Tag: V01-01-07
 2017-03-01 Clemens Weninger
 - add optimized operator () to access 2D, 3D and 4D arrays
@@ -28,7 +36,7 @@ Tag: V01-01-05
 
 Tag: V01-01-04
 2013-08-13 Andy Salnikov
-- Matt noticed that ndarray::reshape() is sonst but calls non-const method
+- Matt noticed that ndarray::reshape() is const but calls non-const method
 - removed constness from reshape() and fix type oof its second parameter
 - added unit test for reshape()
 
@@ -73,7 +81,7 @@ Tag: V00-01-01
 
 Tag: V00-01-00
 2011-12-09 Andy Salnikov
-- get rid of data ownership in ndarray, now it is strictly a "pointer" 
+- get rid of data ownership in ndarray, now it is strictly a "pointer"
   to existing data
 - removed ndarray::copy() method
 - added ndarray::swap() method
