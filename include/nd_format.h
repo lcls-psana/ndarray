@@ -117,17 +117,17 @@ struct dump_ndarray_data {
     if (size > 7) {
       for (unsigned i = 0; i != 3; ++ i) {
         if (i) str << sep;
-        dump_ndarray_data<ElemType, NDim-1>::dump(str, array[i], offset+1);
+        dump_ndarray_data<ElemType, NDim-1>::dump(str, array(i), offset+1);
       }
       str << sep << "...";
       for (unsigned i = size-3; i != size; ++ i) {
         str << sep;
-        dump_ndarray_data<ElemType, NDim-1>::dump(str, array[i], offset+1);
+        dump_ndarray_data<ElemType, NDim-1>::dump(str, array(i), offset+1);
       }
     } else {
       for (unsigned i = 0; i != size; ++ i) {
         if (i) str << sep;
-        dump_ndarray_data<ElemType, NDim-1>::dump(str, array[i], offset+1);
+        dump_ndarray_data<ElemType, NDim-1>::dump(str, array(i), offset+1);
       }
     }
     str << ']';
@@ -141,13 +141,13 @@ struct dump_ndarray_data<ElemType, 1> {
     str << '[';
     unsigned size = array.size();
     if (size > 9) {
-      for (unsigned i = 0; i != 4; ++ i) str << printable(array[i]) << ", ";
+      for (unsigned i = 0; i != 4; ++ i) str << printable(array(i)) << ", ";
       str << "...";
-      for (unsigned i = size-4; i != size; ++ i) str << ", " << printable(array[i]);
+      for (unsigned i = size-4; i != size; ++ i) str << ", " << printable(array(i));
     } else {
       for (unsigned i = 0; i != size; ++ i) {
         if (i) str << ", ";
-        str << printable(array[i]);
+        str << printable(array(i));
       }
     }
     str << ']';
@@ -163,7 +163,7 @@ struct dump_ndarray_data<ElemType, 1> {
  *
  *  @brief Methods for formatting ndarray objects.
  *
- *  This software was developed for the LCLS project.  If you use all or 
+ *  This software was developed for the LCLS project.  If you use all or
  *  part of it, please give an appropriate acknowledgment.
  *
  *  @version $Id$
