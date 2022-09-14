@@ -390,6 +390,21 @@ public:
   }
 
   /**
+   *  @brief Optimized access operator for 1D arrays
+   */
+  inline element& operator() (size_t i)
+  {
+      assert(i < Super::m_shape[0]);
+      return Super::m_data.get()[i*Super::m_strides[0]];
+  }
+
+  inline const element& operator() (size_t i) const
+  {
+      assert(i < Super::m_shape[0]);
+      return Super::m_data.get()[i*Super::m_strides[0]];
+  }
+
+ /**
    *  @brief Optimized access operator for 2D arrays
    */
   inline element& operator() (size_t i, size_t j)
@@ -397,7 +412,7 @@ public:
       assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]));
       return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1]];
   }
-  
+
   inline const element& operator() (size_t i, size_t j) const
   {
       assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]));
@@ -412,13 +427,13 @@ public:
       assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]));
       return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2]];
   }
-  
+
   inline const element& operator() (size_t i, size_t j, size_t k) const
   {
       assert((i < Super::m_shape[0]) && (j < Super::m_shape[1]) && (k < Super::m_shape[2]));
       return Super::m_data.get()[i*Super::m_strides[0] + j*Super::m_strides[1] + k*Super::m_strides[2]];
   }
-  
+
   /**
    *  @brief Optimized access operator for 4D arrays
    */
