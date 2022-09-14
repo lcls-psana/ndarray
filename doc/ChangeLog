@@ -11,6 +11,11 @@ Package author: Andy Salnikov
 Please describe any modifications that you made to the package in the
 reverse time order.
 
+Tag: V01-01-11
+2022-09-13 Mikhail Dubrovin
+- nd_format.h - restore back array[i] in stead of array(i)
+- ndarray.h - add operator () to access 1D array
+
 Tag: V01-01-10
 2022-09-09 Mikhail Dubrovin
 - nd_format.h - try to get rid of warnings at compilation - array[i] -> (i)
