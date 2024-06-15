@@ -11,6 +11,10 @@ Package author: Andy Salnikov
 Please describe any modifications that you made to the package in the
 reverse time order.
 
+Tag: V01-01-12
+2024-06-15 Daniel Damiani
+- nd_format.h - fix compliation error with newer versions of gcc
+
 Tag: V01-01-11
 2022-09-13 Mikhail Dubrovin
 - nd_format.h - restore back array[i] in stead of array(i)
