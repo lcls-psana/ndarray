@@ -13,6 +13,7 @@
 //-----------------
 // C/C++ Headers --
 //-----------------
+#include <iostream>
 #include <iosfwd>
 #include <tr1/type_traits>
 
